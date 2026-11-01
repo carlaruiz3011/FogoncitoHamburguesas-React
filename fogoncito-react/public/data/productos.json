@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Fogoncito Clásica",
+    "descripcion": "Medallón 180g, cheddar, lechuga, tomate, salsa de la casa.",
+    "precio": 6500,
+    "imagen": "/img/clasica.jpg",
+    "categoria": "clasicas"
+  },
+  {
+    "id": 2,
+    "nombre": "Doble Fuego",
+    "descripcion": "Doble medallón, doble cheddar, panceta, cebolla caramelizada.",
+    "precio": 8900,
+    "imagen": "/img/doble-fuego.jpg",
+    "categoria": "especiales"
+  },
+  {
+    "id": 3,
+    "nombre": "Veggie Fogon",
+    "descripcion": "Medallón de lentejas, queso vegano, rúcula y tomate.",
+    "precio": 7200,
+    "imagen": "/img/veggie.jpg",
+    "categoria": "veggie"
+  }
+]
