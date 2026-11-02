@@ -1,7 +1,27 @@
-// ... imports
+import { useState } from 'react';
+import Header from './components/Header';
+import HomePage from './pages/HomePage';
+import MenuPage from './pages/MenuPage';
+import CartPage from './pages/CartPage';
+
 export default function App() {
-  // ... estados (pantalla, carrito)
-  // ... funcion agregarAlCarrito
+  const [pantalla, setPantalla] = useState('home');
+  const [carrito, setCarrito] = useState([]);
+
+  // Función para agregar productos al carrito
+  const agregarAlCarrito = (producto) => {
+    setCarrito((prev) => {
+      const existe = prev.find((item) => item.id === producto.id);
+      if (existe) {
+        return prev.map((item) =>
+          item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
+        );
+      }
+      return [...prev, { ...producto, cantidad: 1 }];
+    });
+  };
+
+  const cantidadCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   return (
     <div className="app-container">
@@ -12,9 +32,24 @@ export default function App() {
       />
       
       <main className="main-content">
-        {pantalla === 'home' && <HomePage onNavegar={setPantalla} onAgregarAlCarrito={agregarAlCarrito} />}
-        {pantalla === 'menu' && <MenuPage onAgregarAlCarrito={agregarAlCarrito} />}
-        {pantalla === 'cart' && <CartPage carrito={carrito} />}
+        {pantalla === 'home' && (
+          <HomePage 
+            onNavegar={setPantalla} 
+            onAgregarAlCarrito={agregarAlCarrito} 
+          />
+        )}
+        
+        {pantalla === 'menu' && (
+          <MenuPage 
+            onAgregarAlCarrito={agregarAlCarrito} 
+          />
+        )}
+        
+        {pantalla === 'cart' && (
+          <CartPage 
+            carrito={carrito} 
+          />
+        )}
       </main>
     </div>
   );
