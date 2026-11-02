@@ -36,6 +36,7 @@ export default function App() {
           <HomePage 
             onNavegar={setPantalla} 
             onAgregarAlCarrito={agregarAlCarrito} 
+            carrito={carrito}
           />
         )}
         

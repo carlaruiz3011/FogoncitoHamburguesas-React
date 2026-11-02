@@ -411,3 +411,54 @@ section {
   margin-bottom: 2rem;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
+/* --- BOTÓN DEL HEADER --- */
+.header-pedido-btn {
+  background-color: #333; /* Gris oscuro por defecto */
+  color: #ccc;
+  border: 1px solid #555;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Cuando hay items en el carrito, se vuelve naranja */
+.header-pedido-btn.con-items {
+  background-color: #ff4500;
+  border-color: #ff4500;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.4);
+}
+
+/* --- BARRA FLOTANTE ABAJO (Como la foto 1) --- */
+.barra-flotante {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background: linear-gradient(90deg, #e63900, #ff8c00);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 1.2rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 69, 0, 0.4);
+  z-index: 1000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-transform: uppercase;
+}
+
+.barra-flotante:hover {
+  transform: translateX(-50%) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 69, 0, 0.6);
+}

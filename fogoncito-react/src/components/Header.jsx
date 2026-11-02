@@ -1,5 +1,3 @@
-import Button from './Button';
-
 export default function Header({ pantallaActiva, onNavegar, cantidadCarrito }) {
   return (
     <header className="header">
@@ -9,12 +7,13 @@ export default function Header({ pantallaActiva, onNavegar, cantidadCarrito }) {
       </div>
       
       <nav className="nav">
-        <Button 
-          variant={pantallaActiva === 'cart' ? 'primary' : 'secondary'} 
+        {/* Ya no usamos <Button>, usamos un <button> con su propia clase */}
+        <button 
+          className={`header-pedido-btn ${cantidadCarrito > 0 ? 'con-items' : ''}`}
           onClick={() => onNavegar('cart')}
         >
-          🛒 Mi pedido ({cantidadCarrito})
-        </Button>
+          🛒 Mi pedido {cantidadCarrito > 0 && `(${cantidadCarrito})`}
+        </button>
       </nav>
     </header>
   );
