@@ -41,6 +41,12 @@ export default function CartPage({ carrito }) {
 
   return (
     <div className="cart-page">
+            <button 
+        onClick={() => onNavegar('home')} 
+        style={{ background: 'none', border: 'none', color: '#ff8c00', cursor: 'pointer', marginBottom: '1rem', fontSize: '1rem' }}
+      >
+        ← Volver al inicio
+      </button>
       <h2>Tu Carrito</h2>
 
       {carrito.length === 0 ? (

@@ -39,15 +39,19 @@ export default function App() {
           />
         )}
         
+        {/* ACÁ AGREGAMOS onNavegar */}
         {pantalla === 'menu' && (
           <MenuPage 
             onAgregarAlCarrito={agregarAlCarrito} 
+            onNavegar={setPantalla} 
           />
         )}
         
+        {/* ACÁ TAMBIÉN AGREGAMOS onNavegar */}
         {pantalla === 'cart' && (
           <CartPage 
             carrito={carrito} 
+            onNavegar={setPantalla} 
           />
         )}
       </main>

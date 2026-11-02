@@ -40,6 +40,13 @@ export default function MenuPage({ onAgregarAlCarrito }) {
 
   return (
     <div className="menu-page">
+      <button 
+        onClick={() => onNavegar('home')} 
+        style={{ background: 'none', border: 'none', color: '#ff8c00', cursor: 'pointer', marginBottom: '1rem', fontSize: '1rem' }}
+      >
+        ← Volver al inicio
+      </button>
+
       <h2>Nuestro Menú</h2>
       
       <input
