@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
+import BarraFlotante from '../components/BarraFlotante'; // <-- Importamos la barra
 
-export default function MenuPage({ onAgregarAlCarrito, onNavegar }) {
+// Le agregamos 'carrito' a las props
+export default function MenuPage({ onAgregarAlCarrito, onNavegar, carrito }) {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [busqueda, setBusqueda] = useState('');
-  const [filtro, setFiltro] = useState('todos'); // 'todos', 'hamburguesas', 'bebidas'
+  const [filtro, setFiltro] = useState('todos');
 
   useEffect(() => {
     fetch('/data/productos.json')
@@ -17,56 +19,57 @@ export default function MenuPage({ onAgregarAlCarrito, onNavegar }) {
       .catch((err) => console.error(err));
   }, []);
 
-  // Lógica para filtrar por botón y por buscador
   const productosFiltrados = productos.filter((p) => {
-    // 1. Filtro por categoría
     if (filtro === 'bebidas' && !p.esBebida) return false;
-    if (filtro === 'hamburguesas' && (p.esBebida || p.esPromo)) return false; // Solo hamburguesas sueltas
-    
-    // 2. Filtro por buscador
+    if (filtro === 'hamburguesas' && (p.esBebida || p.esPromo)) return false;
     return p.nombre.toLowerCase().includes(busqueda.toLowerCase());
   });
 
   if (cargando) return <p className="estado-mensaje">Cargando menú... 🍔</p>;
 
   return (
-    <div className="menu-page">
-      <button 
-        onClick={() => onNavegar('home')} 
-        style={{ background: 'none', border: 'none', color: '#ff8c00', cursor: 'pointer', marginBottom: '1rem', fontSize: '1rem', fontWeight: 'bold' }}
-      >
-        ← Volver al inicio
-      </button>
+    <>
+      <div className="menu-page" style={{ paddingBottom: '100px' }}>
+        <button 
+          onClick={() => onNavegar('home')} 
+          style={{ background: 'none', border: 'none', color: '#ff8c00', cursor: 'pointer', marginBottom: '1rem', fontSize: '1rem', fontWeight: 'bold' }}
+        >
+          ← Volver al inicio
+        </button>
 
-      <h2 className="section-title">Nuestro Menú</h2>
-      
-      <div className="category-buttons">
-        <button className={`cat-btn ${filtro === 'todos' ? 'active' : ''}`} onClick={() => setFiltro('todos')}>Todo</button>
-        <button className={`cat-btn ${filtro === 'hamburguesas' ? 'active' : ''}`} onClick={() => setFiltro('hamburguesas')}>🍔 Hamburguesas</button>
-        <button className={`cat-btn ${filtro === 'bebidas' ? 'active' : ''}`} onClick={() => setFiltro('bebidas')}>🥤 Bebidas</button>
+        <h2 className="section-title">Nuestro Menú</h2>
+        
+        <div className="category-buttons">
+          <button className={`cat-btn ${filtro === 'todos' ? 'active' : ''}`} onClick={() => setFiltro('todos')}>Todo</button>
+          <button className={`cat-btn ${filtro === 'hamburguesas' ? 'active' : ''}`} onClick={() => setFiltro('hamburguesas')}>🍔 Hamburguesas</button>
+          <button className={`cat-btn ${filtro === 'bebidas' ? 'active' : ''}`} onClick={() => setFiltro('bebidas')}>🥤 Bebidas</button>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Buscar por nombre..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="buscador"
+        />
+
+        <div className="productos-grid">
+          {productosFiltrados.length === 0 ? (
+            <p>No se encontraron productos.</p>
+          ) : (
+            productosFiltrados.map((prod) => (
+              <ProductCard 
+                key={prod.id} 
+                producto={prod} 
+                onAgregar={onAgregarAlCarrito} 
+              />
+            ))
+          )}
+        </div>
       </div>
 
-      <input
-        type="text"
-        placeholder="Buscar por nombre..."
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        className="buscador"
-      />
-
-      <div className="productos-grid">
-        {productosFiltrados.length === 0 ? (
-          <p>No se encontraron productos.</p>
-        ) : (
-          productosFiltrados.map((prod) => (
-            <ProductCard 
-              key={prod.id} 
-              producto={prod} 
-              onAgregar={onAgregarAlCarrito} 
-            />
-          ))
-        )}
-      </div>
-    </div>
+      {/* LLAMAMOS AL COMPONENTE DE LA BARRA TAMBIÉN ACÁ */}
+      <BarraFlotante carrito={carrito} onNavegar={onNavegar} />
+    </>
   );
 }

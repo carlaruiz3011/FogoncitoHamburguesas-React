@@ -8,22 +8,8 @@ export default function App() {
   const [pantalla, setPantalla] = useState('home');
   const [carrito, setCarrito] = useState([]);
 
-  // Función para agregar productos al carrito
+  // 1. Agregar producto nuevo
   const agregarAlCarrito = (producto) => {
-      // Función para sumar 1 a un producto existente
-  const sumarCantidad = (id) => {
-    setCarrito(prev => prev.map(item => 
-      item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item
-    ));
-  };
-
-  // Función para restar 1 (y si llega a 0, se borra del carrito)
-  const restarCantidad = (id) => {
-    setCarrito(prev => prev.map(item => 
-      item.id === id ? { ...item, cantidad: item.cantidad - 1 } : item
-    ).filter(item => item.cantidad > 0));
-  };
-
     setCarrito((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
       if (existe) {
@@ -33,6 +19,20 @@ export default function App() {
       }
       return [...prev, { ...producto, cantidad: 1 }];
     });
+  };
+
+  // 2. Sumar cantidad desde el carrito
+  const sumarCantidad = (id) => {
+    setCarrito(prev => prev.map(item => 
+      item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item
+    ));
+  };
+
+  // 3. Restar cantidad desde el carrito
+  const restarCantidad = (id) => {
+    setCarrito(prev => prev.map(item => 
+      item.id === id ? { ...item, cantidad: item.cantidad - 1 } : item
+    ).filter(item => item.cantidad > 0)); // Si llega a 0, se borra
   };
 
   const cantidadCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);
@@ -54,7 +54,6 @@ export default function App() {
           />
         )}
         
-        {/* ACÁ AGREGAMOS onNavegar */}
         {pantalla === 'menu' && (
           <MenuPage 
             onAgregarAlCarrito={agregarAlCarrito} 
@@ -62,12 +61,11 @@ export default function App() {
           />
         )}
         
-        {/* ACÁ TAMBIÉN AGREGAMOS onNavegar */}
         {pantalla === 'cart' && (
           <CartPage 
             carrito={carrito} 
             onNavegar={setPantalla} 
-            sumarCantidad={sumarCantidad}
+            sumarCantidad={sumarCantidad} 
             restarCantidad={restarCantidad}
           />
         )}
