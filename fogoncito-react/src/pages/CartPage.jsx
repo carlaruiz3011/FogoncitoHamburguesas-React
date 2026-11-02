@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '../components/Button'; // Importamos el botón
 
-export default function CartPage({ carrito }) {
+export default function CartPage({ carrito, onNavegar }) {
   // Calculamos el total a pagar
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 
-export default function MenuPage({ onAgregarAlCarrito }) {
+export default function MenuPage({ onAgregarAlCarrito, onNavegar }) {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
