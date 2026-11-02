@@ -133,38 +133,111 @@ section {
   gap: 1.5rem;
 }
 
+/* --- ESTILOS DE LA TARJETA (ProductCard) --- */
 .product-card {
-  background-color: #2a2a2a;
-  border-radius: 10px;
+  background-color: #1e1e1e; /* Fondo gris oscuro */
+  border-radius: 15px;
   overflow: hidden;
+  border: 1px solid #333;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 69, 0, 0.15);
+  border-color: #555;
 }
 
 .product-image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
-  background-color: #111;
 }
 
 .product-info {
-  padding: 1rem;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
+  flex-grow: 1; /* Para que el botón quede siempre abajo */
+}
+
+.product-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: #a0a0a0;
+  margin: 0 0 1.2rem 0;
+  line-height: 1.4;
   flex-grow: 1;
 }
 
-.product-info h3 {
-  margin: 0 0 0.5rem 0;
+/* Botones Simple/Doble/Triple */
+.opciones-burger {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.product-info p {
-  margin: 0 0 1rem 0;
-  color: #aaa;
+.opcion-btn {
+  background-color: transparent;
+  color: #a0a0a0;
+  border: 1px solid #444;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.opcion-btn:hover {
+  border-color: #666;
+  color: #ccc;
+}
+
+.opcion-btn.active {
+  background-color: #ff4500;
+  border-color: #ff4500;
+  color: white;
+}
+
+/* Fila de Precio y Botón */
+.precio-agregar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Empuja al fondo de la tarjeta */
+}
+
+.precio-tag {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffcc00; /* Amarillo Fogoncito */
+}
+
+.agregar-btn {
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 800;
   font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
+.agregar-btn:hover {
+  background-color: #e63900;
+  transform: scale(1.05);
+}
 .precio {
   font-weight: bold;
   font-size: 1.2rem !important;
