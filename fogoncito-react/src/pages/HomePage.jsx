@@ -1,4 +1,4 @@
-¿import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/ProductCard';
 
 export default function HomePage({ onNavegar, onAgregarAlCarrito }) {
   // Datos de prueba para las promos (después los podés traer del JSON)

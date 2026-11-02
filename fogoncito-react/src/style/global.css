@@ -255,6 +255,7 @@ section {
   letter-spacing: 1px;
   background: linear-gradient(90deg, #ff4500, #ffcc00);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -275,6 +276,7 @@ section {
   margin: 0;
   background: linear-gradient(180deg, #ff8c00, #ff4500); /* Degradado naranja a rojo */
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 2px;
 }
