@@ -10,6 +10,20 @@ export default function App() {
 
   // Función para agregar productos al carrito
   const agregarAlCarrito = (producto) => {
+      // Función para sumar 1 a un producto existente
+  const sumarCantidad = (id) => {
+    setCarrito(prev => prev.map(item => 
+      item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item
+    ));
+  };
+
+  // Función para restar 1 (y si llega a 0, se borra del carrito)
+  const restarCantidad = (id) => {
+    setCarrito(prev => prev.map(item => 
+      item.id === id ? { ...item, cantidad: item.cantidad - 1 } : item
+    ).filter(item => item.cantidad > 0));
+  };
+
     setCarrito((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
       if (existe) {
@@ -53,6 +67,8 @@ export default function App() {
           <CartPage 
             carrito={carrito} 
             onNavegar={setPantalla} 
+            sumarCantidad={sumarCantidad}
+            restarCantidad={restarCantidad}
           />
         )}
       </main>
