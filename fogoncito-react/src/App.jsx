@@ -3,12 +3,12 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import CartPage from './pages/CartPage';
+import BarraFlotante from './components/BarraFlotante'; // <-- IMPORTAMOS LA BARRA ACÁ
 
 export default function App() {
   const [pantalla, setPantalla] = useState('home');
   const [carrito, setCarrito] = useState([]);
 
-  // 1. Agregar producto nuevo
   const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
       const existe = prev.find((item) => item.id === producto.id);
@@ -21,18 +21,16 @@ export default function App() {
     });
   };
 
-  // 2. Sumar cantidad desde el carrito
   const sumarCantidad = (id) => {
     setCarrito(prev => prev.map(item => 
       item.id === id ? { ...item, cantidad: item.cantidad + 1 } : item
     ));
   };
 
-  // 3. Restar cantidad desde el carrito
   const restarCantidad = (id) => {
     setCarrito(prev => prev.map(item => 
       item.id === id ? { ...item, cantidad: item.cantidad - 1 } : item
-    ).filter(item => item.cantidad > 0)); // Si llega a 0, se borra
+    ).filter(item => item.cantidad > 0));
   };
 
   const cantidadCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);
@@ -50,7 +48,6 @@ export default function App() {
           <HomePage 
             onNavegar={setPantalla} 
             onAgregarAlCarrito={agregarAlCarrito} 
-            carrito={carrito}
           />
         )}
         
@@ -70,6 +67,12 @@ export default function App() {
           />
         )}
       </main>
+
+      {/* LA BARRA ESTÁ ACÁ: AFUERA DE LAS PANTALLAS, POR ESO SE VE EN TODAS */}
+      {pantalla !== 'cart' && (
+        <BarraFlotante carrito={carrito} onNavegar={setPantalla} />
+      )}
+
     </div>
   );
 }

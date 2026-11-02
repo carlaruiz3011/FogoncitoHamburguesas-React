@@ -453,7 +453,10 @@ section {
   gap: 1rem;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(255, 69, 0, 0.4);
-  z-index: 1000;
+  
+  z-index: 99999; 
+  position: fixed !important; 
+  
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-transform: uppercase;
 }

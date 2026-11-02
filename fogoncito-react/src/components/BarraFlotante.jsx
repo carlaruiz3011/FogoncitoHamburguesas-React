@@ -1,5 +1,6 @@
 export default function BarraFlotante({ carrito, onNavegar }) {
-  // Si el carrito está vacío, no mostramos nada
+  console.log("Datos que recibe la barra:", carrito); // <-- PRUEBA
+
   if (!carrito || carrito.length === 0) return null;
 
   const cantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
@@ -7,10 +8,15 @@ export default function BarraFlotante({ carrito, onNavegar }) {
   const totalFormateado = new Intl.NumberFormat('es-AR').format(total);
 
   return (
-    <div className="barra-flotante" onClick={() => onNavegar('cart')}>
-      <span>VER PEDIDO ({cantidad} {cantidad === 1 ? 'item' : 'items'})</span>
-      <span>•</span>
-      <span>${totalFormateado}</span>
+    <div 
+      style={{
+        position: 'fixed', bottom: '2rem', left: '50%', transform: 'translateX(-50%)',
+        backgroundColor: '#ff4500', color: 'white', padding: '1rem', 
+        borderRadius: '10px', zIndex: 9999, cursor: 'pointer'
+      }}
+      onClick={() => onNavegar('cart')}
+    >
+      VER PEDIDO ({cantidad}) • ${totalFormateado}
     </div>
   );
 }

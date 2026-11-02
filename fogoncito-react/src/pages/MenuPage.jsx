@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
-import BarraFlotante from '../components/BarraFlotante'; // <-- Importamos la barra
 
-// Le agregamos 'carrito' a las props
 export default function MenuPage({ onAgregarAlCarrito, onNavegar, carrito }) {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -29,7 +27,8 @@ export default function MenuPage({ onAgregarAlCarrito, onNavegar, carrito }) {
 
   return (
     <>
-      <div className="menu-page" style={{ paddingBottom: '100px' }}>
+      {/* El div con padding para que la barra no tape los productos */}
+      <div className="menu-page" style={{ paddingBottom: '120px' }}>
         <button 
           onClick={() => onNavegar('home')} 
           style={{ background: 'none', border: 'none', color: '#ff8c00', cursor: 'pointer', marginBottom: '1rem', fontSize: '1rem', fontWeight: 'bold' }}
@@ -68,8 +67,6 @@ export default function MenuPage({ onAgregarAlCarrito, onNavegar, carrito }) {
         </div>
       </div>
 
-      {/* LLAMAMOS AL COMPONENTE DE LA BARRA TAMBIÉN ACÁ */}
-      <BarraFlotante carrito={carrito} onNavegar={onNavegar} />
     </>
   );
 }

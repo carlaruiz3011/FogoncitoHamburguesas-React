@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
-import BarraFlotante from '../components/BarraFlotante'; // <-- Importamos la barra
+
 
 export default function HomePage({ onNavegar, onAgregarAlCarrito, carrito }) { 
   const [promos, setPromos] = useState([]);
@@ -49,10 +49,7 @@ export default function HomePage({ onNavegar, onAgregarAlCarrito, carrito }) {
             </div>
           )}
         </section>
-      </div>
-
-      {/* LLAMAMOS AL COMPONENTE DE LA BARRA */}
-      <BarraFlotante carrito={carrito} onNavegar={onNavegar} />
+      </div> 
     </>
   );
 }
